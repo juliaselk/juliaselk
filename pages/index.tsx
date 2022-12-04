@@ -15,6 +15,7 @@ export default function Home() {
           hello
         </h1>
         <p>I am the coolest</p>
+        <img src="/polaroid.png" />
       </main>
       <footer>
 
