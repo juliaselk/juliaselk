@@ -1,11 +1,10 @@
-/**
- * @type {import('next').NextConfig}
- */
+const isProduction = process.env.NODE_ENV === 'production'
+
 const nextConfig = {
   images: {
     unoptimized: true,
   },
-  assetPrefix: '/juliaselk',
+  assetPrefix: isProduction ? '/juliaselk' : '',
 };
 
 export default nextConfig;
