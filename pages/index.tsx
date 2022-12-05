@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Image from '../components/image/image'
 import styles from '../styles/Home.module.css'
 import polaroid from '../public/polaroid.png'
 
@@ -16,7 +16,7 @@ export default function Home() {
           hello
         </h1>
         <p>I am the coolest</p>
-        <Image alt="Polaroid image of Julia and Savanna" src={polaroid} width="753" height="1209" />
+        <Image alt="Polaroid image of Julia and Savanna" src={polaroid} width={753} height={1209} />
       </main>
       <footer>
 
