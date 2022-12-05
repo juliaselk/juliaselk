@@ -6,10 +6,3 @@
   text-align: center;
   font-size: xx-large;
 }
-
-.container img {
-  display: block;
-  margin: 0 auto;
-  height: auto;
-  max-width: 100px;
-}

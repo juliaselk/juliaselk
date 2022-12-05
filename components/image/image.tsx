@@ -1,5 +1,6 @@
-import React from "react";
 import NextImage, { StaticImageData } from "next/image"
+import { useState } from "react";
+import styles from "../../styles/Image.module.css"
 
 interface StaticRequire {
     default: StaticImageData;
@@ -15,7 +16,11 @@ interface Props {
 
 const Image = (props: Props) => {
     const { src, alt, width, height } = props;
-    return <NextImage alt={alt} src={src} width={width} height={height} />
+    const [open, setOpen] = useState(false)
+    const handleClick = () => {
+        setOpen(!open)
+    }
+    return <NextImage onClick={handleClick} className={open ? styles.open : styles.image} alt={alt} src={src} width={width} height={height} />
 }
 
 export default Image
