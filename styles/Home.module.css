@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.container p {
-  text-align: center;
-  font-size: xx-large;
+.tiles {
+  display: flex;
+  justify-content: center;
 }

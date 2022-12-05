@@ -1,11 +1,7 @@
-import NextImage, { StaticImageData } from "next/image"
+import NextImage from "next/image"
 import { useState } from "react";
 import styles from "../../styles/Image.module.css"
-
-interface StaticRequire {
-    default: StaticImageData;
-}
-declare type StaticImport = StaticRequire | StaticImageData;
+import StaticImport from "../../types/StaticImport";
 
 interface Props {
     src: StaticImport;
