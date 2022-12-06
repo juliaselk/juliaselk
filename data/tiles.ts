@@ -1,6 +1,6 @@
 import polaroid from '../public/polaroid.png'
 
-const foo = 'tres'
+const foo = 'very'
 
 const tiles = [
     { link: '1', headline: 'headline 1', details: '1', image: polaroid },
