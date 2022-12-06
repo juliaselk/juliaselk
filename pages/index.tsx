@@ -3,6 +3,7 @@ import Image from '../components/image/image'
 import styles from '../styles/Home.module.css'
 import polaroid from '../public/polaroid.png'
 import Tile from '../components/tile/tile'
+import tiles from '../data/tiles'
 
 export default function Home() {
   return (
@@ -19,9 +20,7 @@ export default function Home() {
         <p>I am the coolest</p>
         <Image alt="Polaroid image of Julia and Savanna" src={polaroid} width={753} height={1209} />
         <div className={styles.tiles}>
-          <Tile image={polaroid} headline="this is a picture." details='this is a picture someone took.' link={"test"} />
-          <Tile image={polaroid} headline="this is a picture." details='this is a picture someone took.' link={"test"} />
-          <Tile image={polaroid} headline="this is a picture." details='this is a picture someone took.' link={"test"} />
+          {tiles.map(tile => <Tile image={tile.image} headline={tile.headline} details={tile.details} link={tile.link} />)}
         </div>
       </main>
       <footer>
