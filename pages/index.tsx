@@ -20,7 +20,7 @@ export default function Home() {
         <p>I am the coolest</p>
         <Image alt="Polaroid image of Julia and Savanna" src={polaroid} width={753} height={1209} />
         <div className={styles.tiles}>
-          {tiles.map(tile => <Tile image={tile.image} headline={tile.headline} details={tile.details} link={tile.link} />)}
+          {tiles.map((tile, index) => <Tile key={index} image={tile.image} headline={tile.headline} details={tile.details} link={tile.link} />)}
         </div>
       </main>
       <footer>
