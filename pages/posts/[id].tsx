@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
-import Tile from "../../components/tile/tile"
 import tiles from "../../data/tiles"
+import Image from "../../components/image/image"
 
 const Post = () => {
     const router = useRouter()
@@ -9,7 +9,8 @@ const Post = () => {
     const tile = tiles.find(tile => tile.link === id)
     if (!tile) { return 'not found' }
     return <div>
-        <Tile link={tile.link} headline={tile.headline} image={tile.image} details={tile.details} />
+        <Image alt={tile.headline} src={tile.image} width={753} height={1209} />
+        <h1>{tile.headline}</h1>
         {tile.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
     </div>
 }
