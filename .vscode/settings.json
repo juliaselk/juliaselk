@@ -1,0 +1,18 @@
+{
+	"editor.formatOnSave": true,
+	"editor.formatOnType": true,
+	"git.ignoreLimitWarning": true,
+	"files.insertFinalNewline": true,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 4,
+	"prettier.singleQuote": true,
+	"prettier.printWidth": 120,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"eslint.validate": ["javascript", "javascriptreact"],
+	"files.exclude": {
+		"**/node_modules": true
+	},
+	"prettier.arrowParens": "always",
+	"prettier.trailingComma": "es5",
+	"prettier.endOfLine": "lf"
+}
