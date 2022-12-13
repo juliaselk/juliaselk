@@ -1,6 +1,5 @@
 import NextImage from 'next/image';
 import Link from 'next/link';
-import styles from '../../styles/Tile.module.css';
 import StaticImport from '../../types/StaticImport';
 
 interface Props {

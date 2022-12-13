@@ -1,25 +1,25 @@
 .image {
-    display: block;
-    margin: 0 auto;
-    height: auto;
-    max-width: 100px;
-    opacity: 0.1;
-    transition: all 1s;
+	display: block;
+	margin: 0 auto;
+	height: auto;
+	max-width: 100px;
+	opacity: 0.1;
+	transition: all 1s;
 }
 
 .image:hover,
 .open:hover {
-    opacity: 0.5;
-    transition: all 1s;
+	opacity: 0.5;
+	transition: all 1s;
 }
 
 .open {
-    position: fixed;
-    height: auto;
-    top: 100px;
-    left: 100px;
-    right: 300px;
-    transform: rotateZ(45deg);
-    transition: all 5s;
-    opacity: 1;
+	position: fixed;
+	height: auto;
+	top: 100px;
+	left: 100px;
+	right: 300px;
+	transform: rotateZ(45deg);
+	transition: all 5s;
+	opacity: 1;
 }

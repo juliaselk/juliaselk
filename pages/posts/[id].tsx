@@ -1,32 +1,10 @@
 import { useRouter } from 'next/router';
-import tiles from '../../data/tiles';
 import Image from '../../components/image/image';
-import { deleteDoc, doc, getDoc, getFirestore, query, setDoc, where } from 'firebase/firestore';
 import styles from '../../styles/Post.module.scss';
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-	apiKey: 'AIzaSyD5ajHK3D9fcixwQCOVoIbdcaTb9urLFlE',
-	authDomain: 'eric-selk.firebaseapp.com',
-	projectId: 'eric-selk',
-	storageBucket: 'eric-selk.appspot.com',
-	messagingSenderId: '717819120561',
-	appId: '1:717819120561:web:84fe34b101b359efec8b90',
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore();
-
-import { collection, addDoc, getDocs } from 'firebase/firestore';
 import Post from '../../types/Post';
 import { useState, useEffect, useRef } from 'react';
+import { deletePost, loadPost, savePost } from '../../firebase';
 
 const Post = ({ admin }: { admin: boolean }) => {
 	const router = useRouter();
@@ -36,20 +14,21 @@ const Post = ({ admin }: { admin: boolean }) => {
 	const [post, setPost] = useState<Post>();
 	const [toast, setToast] = useState('');
 	const [showToast, setShowToast] = useState(false);
+	const [notFound, setNotFound] = useState(false);
 
 	useEffect(() => {
-		const loadPost = async () => {
-			const querySnapshot = await getDocs(
-				query(collection(db, 'julia', 'data', 'posts'), where('link', '==', id))
-			);
-			const postDocument = querySnapshot.docs[0];
-			documentId.current = postDocument.id;
-			setPost(postDocument.data() as Post);
-		};
 		if (!id) {
 			return;
 		}
-		loadPost();
+		loadPost(id).then((data) => {
+			if (!data) {
+				setNotFound(true);
+				return;
+			}
+			const { post, id } = data;
+			setPost(post);
+			documentId.current = id;
+		});
 	}, [id]);
 
 	useEffect(() => {
@@ -60,27 +39,27 @@ const Post = ({ admin }: { admin: boolean }) => {
 		}
 	}, [showToast]);
 
+	if (notFound) {
+		return <h1>this page is no longer here</h1>;
+	}
 	if (!post) {
 		return null;
 	}
 
-	const { headline, image, paragraphs, details } = post;
+	const { link, headline, image, paragraphs, details } = post;
 
 	const save = () => {
-		const savePost = async () => {
-			await setDoc(doc(db, 'julia', 'data', 'posts', documentId.current), post);
+		savePost(documentId.current, post).then(() => {
 			setToast('post saved!');
 			setShowToast(true);
-		};
-		savePost();
+			router.replace(`/posts/${link}`);
+		});
 	};
 
 	const doDelete = () => {
-		const deletePost = async () => {
-			await deleteDoc(doc(db, 'julia', 'data', 'posts', documentId.current));
+		deletePost(documentId.current).then(() => {
 			router.push('/');
-		};
-		deletePost();
+		});
 	};
 
 	return (
@@ -93,6 +72,11 @@ const Post = ({ admin }: { admin: boolean }) => {
 			))}
 			{admin && (
 				<>
+					<input
+						onChange={(event) => setPost({ ...post, link: event.target.value })}
+						type="text"
+						value={link}
+					/>
 					<input
 						onChange={(event) => setPost({ ...post, headline: event.target.value })}
 						type="text"

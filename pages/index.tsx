@@ -2,32 +2,9 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Tile from '../components/tile/tile';
-import tiles from '../data/tiles';
 import { useEffect, useState } from 'react';
-import { getFirestore } from 'firebase/firestore';
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-	apiKey: 'AIzaSyD5ajHK3D9fcixwQCOVoIbdcaTb9urLFlE',
-	authDomain: 'eric-selk.firebaseapp.com',
-	projectId: 'eric-selk',
-	storageBucket: 'eric-selk.appspot.com',
-	messagingSenderId: '717819120561',
-	appId: '1:717819120561:web:84fe34b101b359efec8b90',
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore();
-
-import { collection, addDoc, getDocs } from 'firebase/firestore';
 import Post from '../types/Post';
+import { addPost, loadPosts } from '../firebase';
 
 export default function Home({ admin }: { admin: boolean }) {
 	const [city, setCity] = useState('');
@@ -60,25 +37,18 @@ export default function Home({ admin }: { admin: boolean }) {
 	const [link, setLink] = useState('');
 	const router = useRouter();
 
-	const add = async () => {
-		const docRef = await addDoc(collection(db, 'julia', 'data', 'posts'), {
-			link,
-			headline: '',
-			details: '',
-			image: '',
-			paragraphs: [],
-		});
-		router.push(`/posts/${link}`);
+	const add = () => {
+		if (link) {
+			addPost(link).then(() => {
+				router.push(`/posts/${link}`);
+			});
+		}
 	};
 
 	const [posts, setPosts] = useState<Post[]>([]);
 
 	useEffect(() => {
-		const loadPosts = async () => {
-			const querySnapshot = await getDocs(collection(db, 'julia', 'data', 'posts'));
-			setPosts(querySnapshot.docs.map((doc) => doc.data() as Post));
-		};
-		loadPosts();
+		loadPosts().then(setPosts);
 	}, []);
 
 	return (
