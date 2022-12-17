@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import Post from '../types/Post';
 import { addPost, loadPosts } from '../firebase';
 import PayPal from '../components/paypal/paypal';
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 export default function Home({ admin }: { admin: boolean }) {
 	const [city, setCity] = useState('');
