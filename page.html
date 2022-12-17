@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<title>food</title>
+		<style>
+			body {
+				background-color: pink;
+				color: black;
+				border: solid 10px black;
+				border-radius: 50px;
+				padding: 30px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: x-large;
+			}
+
+			.circle {
+				background-color: olivedrab;
+				height: 300px;
+				width: 30px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0.7;
+				animation: circle 5s infinite;
+			}
+			@keyframes circle {
+				0% {
+					top: 0;
+					opacity: 0.7;
+					background-color: olivedrab;
+				}
+				25% {
+					left: 100%;
+					top: 50%;
+					opacity: 0;
+					transform: translateY(-50%) translateX(-100%);
+					background-color: hotpink;
+				}
+				75% {
+					left: 0;
+					top: 100%;
+					opacity: 1;
+					background-color: aliceblue;
+					transform: translateY(-100%);
+				}
+				100% {
+					top: 0;
+					opacity: 0.7;
+					background-color: olivedrab;
+				}
+			}
+
+			.box {
+				position: absolute;
+				top: 25%;
+				bottom: 25%;
+				left: 25%;
+				right: 25%;
+				border: dashed 3px lawngreen;
+			}
+		</style>
+	</head>
+	<body>
+		so, if i wanted to write a book, i would name it after myself.
+	</body>
+	<div class="box">
+		<div class="circle">wooooot wooooot wooooot</div>
+	</div>
+</html>
