@@ -1,6 +1,6 @@
 import NextImage from 'next/image';
 import { useState } from 'react';
-import styles from '../../styles/Image.module.css';
+import styles from '../../styles/Image.module.scss';
 import StaticImport from '../../types/StaticImport';
 
 interface Props {

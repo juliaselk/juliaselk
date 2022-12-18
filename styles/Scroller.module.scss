@@ -1,0 +1,49 @@
+.wrapper {
+	position: relative;
+
+	&:hover {
+		.previous,
+		.next {
+			visibility: visible;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	gap: 10px;
+	overflow-x: scroll;
+	scroll-snap-type: x mandatory;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	> * {
+		scroll-snap-align: start;
+	}
+}
+
+.previous,
+.next {
+	visibility: hidden;
+	position: absolute;
+	top: calc(50% - 20px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	background-color: rgba(255, 255, 255, 0.7);
+	color: black;
+	border-radius: 50%;
+	font-weight: bolder;
+}
+
+.previous {
+	left: 0;
+}
+
+.next {
+	right: 0;
+}
